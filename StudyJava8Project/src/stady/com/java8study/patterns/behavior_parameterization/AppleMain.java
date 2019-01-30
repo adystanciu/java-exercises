@@ -9,9 +9,9 @@ public class AppleMain {
     public static void main(String[] args) {
 
         List<Apple> inventory = Arrays.asList(new Apple("green", 20), new Apple("yellow", 150), new Apple("red", 200));
-//        FillterApples.filterGreenApples(inventory).forEach(System.out::println);
-//        FillterApples.filterApplesByColor(inventory, "red").forEach(System.out::println);
-//
+        FillterApples.filterGreenApples(inventory).forEach(System.out::println);
+        FillterApples.filterApplesByColor(inventory, "red").forEach(System.out::println);
+
 //        FillterApples.filterApplesByWeight(inventory, 100.0).forEach(System.out::println);
 
 //        BETTER
