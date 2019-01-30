@@ -28,7 +28,7 @@ public class MainController {
 //     @RequestMapping(value ="/users", method = RequestMethod.GET,
 //                    produces = "application/json;charset=UTF-8")
 
-    @GetMapping(value = "users",produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "users", produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "Return all users from gradle_db_users.Users table")
     @ApiResponses(
@@ -36,12 +36,12 @@ public class MainController {
                     @ApiResponse(code = 200, message = "Successful Read Operation")
             }
     )
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return (ArrayList<User>) userService.getUsers();
     }
 
 
-    @PostMapping(value = "users",consumes = "application/json;charset=UTF-8")
+    @PostMapping(value = "users", consumes = "application/json;charset=UTF-8")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Return a HttpStatus message")
@@ -51,15 +51,15 @@ public class MainController {
                     @ApiResponse(code = 200, message = "Successful Create Operation")
             }
     )
-    public HttpStatus addUser(@RequestBody User user){
+    public HttpStatus addUser(@RequestBody User user) {
         logger.debug("User details : {}", user);
         User u = userService.addUser(user);
 
-        if(u == null) return HttpStatus.NOT_IMPLEMENTED;
+        if (u == null) return HttpStatus.NOT_IMPLEMENTED;
         else return HttpStatus.OK;
     }
 
-    @PutMapping(value ="users",
+    @PutMapping(value = "users",
             consumes = "application/json;charset=UTF-8",
             produces = "application/json;charset=UTF-8")
     @ResponseBody
@@ -70,8 +70,23 @@ public class MainController {
                     @ApiResponse(code = 200, message = "Successful Update Operation")
             }
     )
-    public User updateUser(@RequestBody User user){
+    public User updateUser(@RequestBody User user) {
         logger.debug("User for update : {}", user);
         return userService.updateUser(user);
+    }
+
+    @DeleteMapping(value = "users", consumes = "application/json;charset=UTF-8")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Return a HttpStatus message")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 501, message = "The 501 message code indicates the fact the user was not deleted from DB."),
+                    @ApiResponse(code = 200, message = "Successful Create Operation")
+            }
+    )
+    public HttpStatus deleteUser(@RequestBody User user) {
+        logger.debug("User details : {}", user);
+        return HttpStatus.NOT_IMPLEMENTED;
     }
 }
