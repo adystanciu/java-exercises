@@ -1,0 +1,12 @@
+#My Notes
+
+#for commit please check Readme.txt
+
+#echo "# java-exercises" >> README.txt
+#git init
+#git add folder_name
+#git commit -m "first commit"
+#git remote add origin https://github.com/adystanciu/java-exercises.git
+#git push -u origin master
+
+# for access swagger: localhost:8089/swagger-ui.html (tutorial: https://www.youtube.com/watch?v=HHyjWc0ASl8)
