@@ -1,4 +1,7 @@
-package stady.com.java8study.patterns.behavior_parameterization;
+package stady.com.java8study.lambda.patterns.behavior_parameterization;
+
+import stady.com.java8study.lambda.Apple;
+import stady.com.java8study.lambda.predicates.ApplePredicate;
 
 import java.util.ArrayList;
 import java.util.List;

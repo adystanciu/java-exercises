@@ -1,8 +1,11 @@
-package stady.com.java8study.patterns.behavior_parameterization;
+package stady.com.java8study.lambda;
+
+import stady.com.java8study.lambda.patterns.behavior_parameterization.FillterApples;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class AppleMain {
 
@@ -44,6 +47,20 @@ public class AppleMain {
 //        inventory.sort((Apple a1, Apple a2) -> a1.getWeight() > a2.getWeight() ? -1 : 1);
 //        inventory.forEach(System.out::println);
 
+        inventory.sort(Comparator
+                .comparing(Apple::getWeight)
+                .reversed()
+                .thenComparing((Apple a) -> a.getColor())); // Apple::getColor
+
+        Apple testApple = new Apple("red", 300);
+
+        Predicate<Apple> p = (Apple a) -> !"red".equals(a.getColor());
+        boolean isNotRed = p.test(testApple);
+
+        p.and(a -> a.getWeight()>100)
+                .negate()
+                .or(a -> "yellow".equals(a.getColor()));
+
 //        2 Threads:
 //        Thread t = new Thread(new Runnable() {
 //            public void run() {
@@ -58,7 +75,7 @@ public class AppleMain {
 }
 
 /*
-*               SUMMARY: LAMBDA ULTIMATE ATTACK
+*               SUMMARY: LAMBDA ULTIMATE ATTACK.. Lambda - anonymous function
 *
     1) Behavior parameterization is the ability for a method to take multiple different behaviors as parameters and use them internally to accomplish different behaviors.
     2) Behavior parameterization lets you make your code more adaptive to changing requirements and saves on engineering efforts in the future.

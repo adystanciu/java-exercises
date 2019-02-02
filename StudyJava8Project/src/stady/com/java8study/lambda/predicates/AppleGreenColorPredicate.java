@@ -1,4 +1,6 @@
-package stady.com.java8study.patterns.behavior_parameterization;
+package stady.com.java8study.lambda.predicates;
+
+import stady.com.java8study.lambda.Apple;
 
 public class AppleGreenColorPredicate implements ApplePredicate {
     @Override

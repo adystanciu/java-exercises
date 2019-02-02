@@ -1,4 +1,4 @@
-package stady.com.java8study.patterns.behavior_parameterization;
+package stady.com.java8study.lambda;
 
 public class Apple {
 
