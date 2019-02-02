@@ -2,6 +2,7 @@ package com.stady.FirstGradleProject.controllers;
 
 import com.stady.FirstGradleProject.model.User;
 import com.stady.FirstGradleProject.services.UserService;
+import com.stady.FirstGradleProject.services.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -55,8 +56,7 @@ public class MainController {
         logger.debug("User details : {}", user);
         User u = userService.addUser(user);
 
-        if (u == null) return HttpStatus.NOT_IMPLEMENTED;
-        else return HttpStatus.OK;
+        return (u != null ? HttpStatus.OK : HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PutMapping(value = "users",
@@ -86,7 +86,17 @@ public class MainController {
             }
     )
     public HttpStatus deleteUser(@RequestBody User user) {
-        logger.debug("User details : {}", user);
-        return HttpStatus.NOT_IMPLEMENTED;
+        logger.debug("User details : {} with the id: {}", user, user.getId());
+        boolean isDeleted = userService.deleteUser(user);
+
+        return (isDeleted ? HttpStatus.OK : HttpStatus.NOT_IMPLEMENTED);
+    }
+    @RequestMapping(value = "user/{username}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    @ApiOperation(value = "Return an user by username from  gradle_db_users.Users table")
+    public User getUserByUsername(@PathVariable String username){
+        logger.debug("Get user from Controller by username : {}", username);
+        User user = userService.getUserByUsername(username).get();
+        return user;
     }
 }

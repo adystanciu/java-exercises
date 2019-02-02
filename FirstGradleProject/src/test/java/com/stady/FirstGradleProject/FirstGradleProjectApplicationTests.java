@@ -3,7 +3,7 @@ package com.stady.FirstGradleProject;
 import com.stady.FirstGradleProject.controllers.MainController;
 import com.stady.FirstGradleProject.model.User;
 import com.stady.FirstGradleProject.repository.UserRepository;
-import com.stady.FirstGradleProject.services.UserService;
+import com.stady.FirstGradleProject.services.UserServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ public class FirstGradleProjectApplicationTests {
 	@Autowired
 	private MainController mainController;
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userServiceImpl;
 	@MockBean
 	private UserRepository userRepository;
 
@@ -29,7 +29,7 @@ public class FirstGradleProjectApplicationTests {
 	@Test
 	public void contextLoads() {
 		Assert.assertNotNull(mainController);
-		Assert.assertNotNull(userService);
+		Assert.assertNotNull(userServiceImpl);
 		Assert.assertNotNull(userRepository);
 	}
 

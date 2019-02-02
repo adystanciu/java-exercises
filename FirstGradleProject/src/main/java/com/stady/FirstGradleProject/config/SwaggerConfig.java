@@ -38,7 +38,7 @@ public class SwaggerConfig {
                 new Contact("Adi Stanciu", "https://github.com/adystanciu","ady_stanciu_91@yahoo.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licesen.html",
-                new ArrayList<>()
+                new ArrayList<>() //vendor extension
         );
 
         return apiInfo;
