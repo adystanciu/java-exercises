@@ -3,12 +3,10 @@ package stady.com.java8study.streams;
 import stady.com.java8study.lambda.Apple;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
 
 public class StreamsAppleMain {
 

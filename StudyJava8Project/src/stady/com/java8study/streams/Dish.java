@@ -1,5 +1,6 @@
 package stady.com.java8study.streams;
 
+// immutable class
 public class Dish {
 
     private final String name;
