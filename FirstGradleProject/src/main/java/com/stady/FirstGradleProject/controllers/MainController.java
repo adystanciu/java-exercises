@@ -99,4 +99,7 @@ public class MainController {
         User user = userService.getUserByUsername(username).get();
         return user;
     }
+
+    //TODO:
+    //show as json api.message for each ENV
 }
