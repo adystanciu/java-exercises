@@ -1,19 +1,28 @@
 package com.stady.FirstGradleProject.config;
 
+import org.hibernate.validator.constraints.Length;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import javax.validation.constraints.NotBlank;
 
 @Configuration
 @ConfigurationProperties("spring.datasource")
 public class DBConfiguration {
 
     private  String driverClassName;
+    @Length(min = 10)
     private  String url;
+    @NotBlank
     private  String username;
     private  String password;
-    private String message;
+
+    @Autowired
+    private Logger logger;
 
     public String getDriverClassName() {
         return driverClassName;
@@ -50,18 +59,18 @@ public class DBConfiguration {
     @Profile("test")
     @Bean
     public String testDatabaseConnectionDetails(){
-        System.out.println("DB connection for TEST - H2");
-        System.out.println(driverClassName);
-        System.out.println(url);
+        logger.debug("DB connection for TEST - H2");
+        logger.debug(driverClassName);
+        logger.debug(url);
         return "DB connection for TEST - H2";
     }
 
     @Profile("prod")
     @Bean
     public String prodDatabaseConnectionDetails(){
-        System.out.println("DB connection for PROD - Mysql");
-        System.out.println(driverClassName);
-        System.out.println(url);
-        return "DB connection for Prod - Mysql";
+        logger.debug("DB connection for PROD - MYSQL");
+        logger.debug(driverClassName);
+        logger.debug(url);
+        return "DB connection for PROD - MYSQL";
     }
 }

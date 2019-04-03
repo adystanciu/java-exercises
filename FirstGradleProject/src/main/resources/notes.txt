@@ -9,4 +9,4 @@
 #git remote add origin https://github.com/adystanciu/java-exercises.git
 #git push -u origin master
 
-# for access swagger: localhost:8089/swagger-ui.html (tutorial: https://www.youtube.com/watch?v=HHyjWc0ASl8)
+# for access swagger: localhost:<SERVER_PORT>/swagger-ui.html (tutorial: https://www.youtube.com/watch?v=HHyjWc0ASl8)

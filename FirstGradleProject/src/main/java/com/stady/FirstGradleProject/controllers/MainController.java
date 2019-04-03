@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,9 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${app.message}")
+    private String welcomeMessage;
 
     @Autowired
     private Logger logger;
@@ -100,6 +104,15 @@ public class MainController {
         return user;
     }
 
-    //TODO:
-    //show as json api.message for each ENV
+    @GetMapping(value = "welcome", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    @ApiOperation(value = "Return the environment message")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Successful Read Operation")
+            }
+    )
+    public String getEnvironmentMessage() {
+        return welcomeMessage;
+    }
 }
