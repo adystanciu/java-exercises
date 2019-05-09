@@ -32,14 +32,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) {
         logger.debug("The addUser method from UserServiceImpl was called. ");
-        User u = null;
+        Optional<User> u = null;
         try {
-            u = userRepository.save(user);
-            logger.debug("User {} was added into DB. ", user.getUsername());
+            u = userRepository.findByUsername(user.getUsername());
+            if(u.isPresent()){
+                logger.debug("User {} already exists into DB. ", user.getUsername());
+            }else{
+                userRepository.save(user);
+                logger.debug("User {} was added into DB. ", user.getUsername());
+                return u.get();
+            }
         } catch (Exception e) {
             errorLogger.error("User was not added and transaction was rollback.", e);
         }
-        return u;
+        return null;
     }
 
     @Override

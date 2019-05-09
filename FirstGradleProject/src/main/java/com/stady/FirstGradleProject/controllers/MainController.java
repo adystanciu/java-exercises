@@ -60,7 +60,7 @@ public class MainController {
         logger.debug("User details : {}", user);
         User u = userService.addUser(user);
 
-        return (u != null ? HttpStatus.OK : HttpStatus.NOT_IMPLEMENTED);
+        return (u != null ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE);
     }
 
     @PutMapping(value = "users",

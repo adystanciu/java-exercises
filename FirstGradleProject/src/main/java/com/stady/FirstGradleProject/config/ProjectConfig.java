@@ -7,9 +7,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @Import({SwaggerConfig.class})
-@ComponentScan("com.stady.FirstGradleProject")
+@ComponentScan(basePackages = "config, controllers, services, repository")
 public class ProjectConfig {
-
 
     @Bean
     @Scope("prototype")
