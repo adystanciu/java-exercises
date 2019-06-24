@@ -34,7 +34,7 @@ public class MainController {
 //                    produces = "application/json;charset=UTF-8")
 
     @GetMapping(value = "users", produces = "application/json;charset=UTF-8")
-    @ResponseBody
+//    @ResponseBody
     @ApiOperation(value = "Return all users from gradle_db_users.Users table")
     @ApiResponses(
             value = {
@@ -47,7 +47,7 @@ public class MainController {
 
 
     @PostMapping(value = "users", consumes = "application/json;charset=UTF-8")
-    @ResponseBody
+//    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Return a HttpStatus message")
     @ApiResponses(
@@ -66,7 +66,7 @@ public class MainController {
     @PutMapping(value = "users",
             consumes = "application/json;charset=UTF-8",
             produces = "application/json;charset=UTF-8")
-    @ResponseBody
+//    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update a user from gradle_db_users.Users table")
     @ApiResponses(
@@ -80,7 +80,7 @@ public class MainController {
     }
 
     @DeleteMapping(value = "users", consumes = "application/json;charset=UTF-8")
-    @ResponseBody
+//    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Return a HttpStatus message")
     @ApiResponses(
@@ -105,7 +105,7 @@ public class MainController {
     }
 
     @GetMapping(value = "welcome", produces = "application/json;charset=UTF-8")
-    @ResponseBody
+//    @ResponseBody
     @ApiOperation(value = "Return the environment message")
     @ApiResponses(
             value = {
