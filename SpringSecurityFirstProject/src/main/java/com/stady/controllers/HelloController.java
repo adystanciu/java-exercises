@@ -1,15 +1,17 @@
 package com.stady.controllers;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("ssec")
+@Controller
+//@RequestMapping("ssec")
 public class HelloController {
 
-    @GetMapping(value = "/hello", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "/hello")
     public String hello(){
-        return "Hello World!";
+//        return "Hello World!";
+        return "hello.html";
     }
 }

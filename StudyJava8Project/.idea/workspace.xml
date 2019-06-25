@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7aa46ef-9a79-48ee-9226-540770833be3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../FirstGradleProject/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGradleProject/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SpringSecurityFirstProject/src/main/java/com/stady/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringSecurityFirstProject/src/main/java/com/stady/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stady/com/java8study/lambda/AppleMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stady/com/java8study/lambda/AppleMain.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +17,7 @@
       <file leaf-file-name="AppleMain.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/stady/com/java8study/lambda/AppleMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
+            <state relative-caret-position="656">
               <caret line="83" column="143" selection-start-line="83" selection-start-column="143" selection-end-line="83" selection-end-column="143" />
             </state>
           </provider>
@@ -177,6 +173,14 @@
       <option name="presentableId" value="Default" />
       <updated>1561475466900</updated>
     </task>
+    <task id="LOCAL-00001" summary="test commit for java8studyProject">
+      <created>1561475792986</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1561475792986</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -193,7 +197,7 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32963374" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32963374" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
@@ -216,10 +220,14 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test commit for java8studyProject" />
+    <option name="LAST_COMMIT_MESSAGE" value="test commit for java8studyProject" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/stady/com/java8study/lambda/AppleMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
+        <state relative-caret-position="656">
           <caret line="83" column="143" selection-start-line="83" selection-start-column="143" selection-end-line="83" selection-end-column="143" />
         </state>
       </provider>
