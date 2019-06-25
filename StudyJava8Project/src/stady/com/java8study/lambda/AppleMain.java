@@ -82,7 +82,6 @@ public class AppleMain {
     3) Passing code is a way to give new behaviors as arguments to a method. But it’s verbose prior to Java 8.
     Anonymous classes helped a bit before Java 8 to get rid of the verbosity associated with declaring multiple concrete classes for an interface that are needed only once.
     4) The Java API contains many methods that can be parameterized with different behaviors, which include sorting, threads, and GUI handling.
-
 *
 *
 * */
