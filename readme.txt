@@ -5,7 +5,7 @@
 # De fiecare data cand punem un nou proiect in acest repository, cream un folder cu numele proiectului. 
 # Introducem in acest folder proiectul si dam git add la folder nou creat.
 
-
+################################
 
 git init
 git add folderul_nou_creat

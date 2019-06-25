@@ -1,6 +1,9 @@
 ### My GIT IGNORE FILES###
 logs/*.log
 logs/archived/*.gz
+embeddedDB.lock.db
+embeddedDB.trace.db
+embeddedDB.h2.db
 
 
 .gradle
