@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -44,9 +45,9 @@ public class UserIntegrationTest {
      user.setUsername("ana_maria_test");
     
      restTemplate.postForObject(url, user, Void.class);
-     User userReturned = userRepository.findByUsername(user.getUsername());
+     Optional<User> userReturned = userRepository.findByUsername(user.getUsername());
      Assert.assertNotNull(userReturned);
-     Assert.assertEquals(userReturned.getUsername(), user.getUsername());
+     Assert.assertEquals(userReturned.get().getUsername(), user.getUsername());
     }
     
      @Test

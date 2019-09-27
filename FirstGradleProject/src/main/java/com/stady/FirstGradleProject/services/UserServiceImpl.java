@@ -1,5 +1,6 @@
 package com.stady.FirstGradleProject.services;
 
+import com.stady.FirstGradleProject.errors.UserNotFoundException;
 import com.stady.FirstGradleProject.model.User;
 import com.stady.FirstGradleProject.repository.UserRepository;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private Logger logger;
 
-    private static final Logger errorLogger = LoggerFactory.getLogger("custom-error-logger");
+    private static final Logger errorLogger = LoggerFactory.getLogger("custom-errors-logger");
 
     @Override
     public List<User> getUsers() {
@@ -30,54 +31,61 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addUser(User user) {
-        logger.debug("The addUser method from UserServiceImpl was called. ");
-        Optional<User> u = null;
-        try {
-            u = userRepository.findByUsername(user.getUsername());
-            if(u.isPresent()){
-                logger.debug("User {} already exists into DB. ", user.getUsername());
-            }else{
-                userRepository.save(user);
-                logger.debug("User {} was added into DB. ", user.getUsername());
-                return u.get();
-            }
-        } catch (Exception e) {
-            errorLogger.error("User was not added and transaction was rollback.", e);
-        }
-        return null;
+    public User getUsersById(Long id) {
+        logger.debug("The getUserById method from UserServiceImpl was called.");
+        final Optional<User> user = userRepository.findById(id);
+        if(!user.isPresent()) throw new UserNotFoundException("User with id: "+ id + " does not Exist!");
+
+        return user.get();
     }
 
     @Override
-    public User updateUser(User user) {
+    public User addUser(User user) throws Exception {
+        logger.debug("The addUser method from UserServiceImpl was called. ");
+        Optional<User> u = null;
+
+            u = userRepository.findByUsername(user.getUsername());
+            if(u.isPresent()){
+                Exception e = new RuntimeException("The username: "+ user.getUsername()+" already exists. It should be unique!");
+                errorLogger.error("The transaction was rollback.");
+                throw e;
+            }else{
+                userRepository.save(user);
+                logger.debug("User {} was added into DB. ", user.getUsername());
+                return user;
+            }
+    }
+
+    @Override
+    public User updateUser(User user) throws Exception {
         logger.debug("The updateUser method from UserServiceImpl was called. ");
         User userUpdated = null;
-        try {
-            Optional<User> userById = userRepository.findById(user.getId());
+        Optional<User> userById = userRepository.findByUsername(user.getUsername());
             if (userById.isPresent()) {
+                user.setId(userById.get().getId());
                 userUpdated = userRepository.save(user);
                 logger.debug("User {} was updated into DB. ", userUpdated.getUsername());
+            }else{
+                Exception e = new UserNotFoundException("The user: "+ user.getUsername() + "does not exist! The transaction was rollback.");
+                errorLogger.error("The user: {} was not updated and transaction was rollback.", user.getUsername());
+                throw e;
             }
-        } catch (Exception e) {
-            errorLogger.error("User was not updated and transaction was rollback.", e);
-        }
         return userUpdated;
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public boolean deleteUser(User user) throws Exception {
         logger.debug("The deleteUser method from UserServiceImpl was called. ");
-        try {
-            Optional<User> userById = userRepository.findById(user.getId());
+        Optional<User> userById = userRepository.findByUsername(user.getUsername());
             if (userById.isPresent()) {
-                userRepository.delete(user);
+                userRepository.delete(userById.get());
                 logger.debug("User with id: {} was deleted from DB. ", user.getId());
                 return true;
+            }else{
+                Exception e = new UserNotFoundException("The user: "+ user.getUsername() + "does not exist! The transaction was rollback.");
+                errorLogger.error("The user was not deleted and transaction was rollback.", user.getUsername());
+                throw e;
             }
-        } catch (Exception e) {
-            errorLogger.error("User was not deleted and transaction was rollback.", e);
-        }
-        return false;
     }
 
     @Override
@@ -86,7 +94,7 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
-            logger.debug("User {} was deleted from DB. ", user.get().getUsername());
+            logger.debug("User {} is present on DB: ", user.get().getUsername());
             return user;
         }
             logger.debug("User with username: {} is not present into DB. ", user.get().getUsername());

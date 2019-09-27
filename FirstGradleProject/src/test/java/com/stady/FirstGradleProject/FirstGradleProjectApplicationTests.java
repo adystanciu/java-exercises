@@ -35,7 +35,7 @@ public class FirstGradleProjectApplicationTests {
 
 
 	@Test
-	public void addTest(){
+	public void addTest() throws Exception {
 		User user = new User();
 		mainController.addUser(user);
 		Mockito.verify(userRepository, Mockito.times(1)).save(user);

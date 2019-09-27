@@ -9,11 +9,13 @@ public interface UserService {
 
     public List<User> getUsers();
 
-    public User addUser(User user);
+    public User getUsersById(Long id);
 
-    public User updateUser(User user);
+    public User addUser(User user) throws Exception;
 
-    public boolean deleteUser(User user);
+    public User updateUser(User user) throws Exception;
+
+    public boolean deleteUser(User user) throws Exception;
 
     public Optional<User> getUserByUsername(String username);
 
