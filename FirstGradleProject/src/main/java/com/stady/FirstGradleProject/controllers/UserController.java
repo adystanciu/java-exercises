@@ -18,8 +18,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("rest")
-@Api(value = "MainController", description = "This Resource is used for CRUD services")
-public class MainController {
+@Api(value = "UserController", description = "This Resource is used for CRUD services")
+public class UserController {
 
     @Autowired
     private UserService userService;

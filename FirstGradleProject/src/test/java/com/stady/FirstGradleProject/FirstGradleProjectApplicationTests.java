@@ -1,6 +1,6 @@
 package com.stady.FirstGradleProject;
 
-import com.stady.FirstGradleProject.controllers.MainController;
+import com.stady.FirstGradleProject.controllers.UserController;
 import com.stady.FirstGradleProject.model.User;
 import com.stady.FirstGradleProject.repository.UserRepository;
 import com.stady.FirstGradleProject.services.UserServiceImpl;
@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class FirstGradleProjectApplicationTests {
 
 	@Autowired
-	private MainController mainController;
+	private UserController userController;
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	@MockBean
@@ -28,7 +28,7 @@ public class FirstGradleProjectApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		Assert.assertNotNull(mainController);
+		Assert.assertNotNull(userController);
 		Assert.assertNotNull(userServiceImpl);
 		Assert.assertNotNull(userRepository);
 	}
@@ -37,7 +37,7 @@ public class FirstGradleProjectApplicationTests {
 	@Test
 	public void addTest() throws Exception {
 		User user = new User();
-		mainController.addUser(user);
+		userController.addUser(user);
 		Mockito.verify(userRepository, Mockito.times(1)).save(user);
 	}
 
