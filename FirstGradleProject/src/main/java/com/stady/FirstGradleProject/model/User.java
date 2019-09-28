@@ -16,17 +16,17 @@ public class User implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 4, max = 30)
+    @Size(min = 4, max = 30, message = "The username should have alt least 4 characters and maxim 30!")
     @ApiModelProperty(notes = "the username")
     private String username;
 
     @NotNull
-    @Size(min = 4, max = 30)
+    @Size(min = 4, max = 30, message = "The password should have alt least 4 characters and maxim 30!")
     @ApiModelProperty(notes = "the password of the user")
     private String password;
 
     @NotNull
-    @Size(min = 4, max = 50)
+    @Size(min = 4, max = 50, message = "The email should have alt least 4 characters and maxim 50!")
     @ApiModelProperty(notes = "the email of the user")
     private String email;
 

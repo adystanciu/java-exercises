@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) throws Exception {
+    public User updateUser(User user) throws UserNotFoundException {
         logger.debug("The updateUser method from UserServiceImpl was called. ");
         User userUpdated = null;
         Optional<User> userById = userRepository.findByUsername(user.getUsername());
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
                 userUpdated = userRepository.save(user);
                 logger.debug("User {} was updated into DB. ", userUpdated.getUsername());
             }else{
-                Exception e = new UserNotFoundException("The user: "+ user.getUsername() + "does not exist! The transaction was rollback.");
+                UserNotFoundException e = new UserNotFoundException("The user: "+ user.getUsername() + "does not exist! The transaction was rollback.");
                 errorLogger.error("The user: {} was not updated and transaction was rollback.", user.getUsername());
                 throw e;
             }
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(User user) throws Exception {
+    public boolean deleteUser(User user) throws UserNotFoundException {
         logger.debug("The deleteUser method from UserServiceImpl was called. ");
         Optional<User> userById = userRepository.findByUsername(user.getUsername());
             if (userById.isPresent()) {
@@ -82,23 +82,24 @@ public class UserServiceImpl implements UserService {
                 logger.debug("User with id: {} was deleted from DB. ", user.getId());
                 return true;
             }else{
-                Exception e = new UserNotFoundException("The user: "+ user.getUsername() + "does not exist! The transaction was rollback.");
+                UserNotFoundException e = new UserNotFoundException("The user: "+ user.getUsername() + "does not exist! The transaction was rollback.");
                 errorLogger.error("The user was not deleted and transaction was rollback.", user.getUsername());
                 throw e;
             }
     }
 
     @Override
-    public Optional<User> getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws UserNotFoundException {
         logger.debug("The getUserByUsername method from UserServiceImpl was called. ");
 
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
             logger.debug("User {} is present on DB: ", user.get().getUsername());
-            return user;
+            return user.get();
         }
-            logger.debug("User with username: {} is not present into DB. ", user.get().getUsername());
-            return Optional.empty();
+        UserNotFoundException e = new UserNotFoundException("The user: "+ username + "does not exist! The transaction was rollback.");
+        errorLogger.error("The user was not deleted and transaction was rollback.", username);
+        throw e;
     }
 
 }
