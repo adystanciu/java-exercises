@@ -1,6 +1,9 @@
-package com.stady.FirstGradleProject.errors;
+package com.stady.FirstGradleProject.controllers;
 
 
+import com.stady.FirstGradleProject.errors.ExceptionResponseFormat;
+import com.stady.FirstGradleProject.errors.UserNotFoundException;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +20,8 @@ import java.util.Date;
 
 @ControllerAdvice
 @RestController
-public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+@Api(value = "CustomResponseEntityExceptionHandlerController", description = "This Resource is used for error handling")
+public class CustomResponseEntityExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @Autowired
     private Logger logger;

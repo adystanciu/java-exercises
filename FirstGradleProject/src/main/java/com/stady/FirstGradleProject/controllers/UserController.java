@@ -29,9 +29,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Value("${app.message}")
-    private String welcomeMessage;
-
     @Autowired
     private Logger logger;
 
@@ -68,7 +65,7 @@ public class UserController {
         return userService.getUsersById(id);
     }
 
-    @PostMapping(value = "users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Return a HttpStatus message")
     @ApiResponses(
             value = {
@@ -139,14 +136,4 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(resource);
     }
 
-    @GetMapping(value = "welcome", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "Return the environment message")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(code = 200, message = "Successful Read Operation")
-            }
-    )
-    public String getEnvironmentMessage() {
-        return welcomeMessage;
-    }
 }

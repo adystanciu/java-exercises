@@ -1,5 +1,6 @@
 package com.stady.FirstGradleProject.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity(name = "Users")
+@ApiModel(description = "All details about the user")
 public class User implements Serializable {
 
     @Id
