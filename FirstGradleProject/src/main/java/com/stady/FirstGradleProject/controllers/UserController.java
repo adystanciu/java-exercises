@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +37,9 @@ public class UserController {
 
 //     @RequestMapping(value ="/users", method = RequestMethod.GET,
 //                    produces = "application/json;charset=UTF-8")
+//    Bellow is an alternative to GetMapping and MediaType.APPLICATION_JSON_UTF8_VALUE
 
-    @GetMapping(value = "users", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    @ResponseBody
     @ApiOperation(value = "Return all users from gradle_db_users.Users table")
     @ApiResponses(
@@ -52,7 +54,7 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "user", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Return an user")
     @ApiResponses(
@@ -66,7 +68,7 @@ public class UserController {
         return userService.getUsersById(id);
     }
 
-    @PostMapping(value = "users", consumes = "application/json;charset=UTF-8")
+    @PostMapping(value = "users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Return a HttpStatus message")
     @ApiResponses(
             value = {
@@ -82,8 +84,8 @@ public class UserController {
     }
 
     @PutMapping(value = "users",
-            consumes = "application/json;charset=UTF-8",
-            produces = "application/json;charset=UTF-8")
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Update a user from gradle_db_users.Users table")
     @ApiResponses(
             value = {
@@ -98,7 +100,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(u);
     }
 
-    @DeleteMapping(value = "users", consumes = "application/json;charset=UTF-8")
+    @DeleteMapping(value = "users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Return a HttpStatus message")
     @ApiResponses(
             value = {
@@ -116,7 +118,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "users/{username}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "users/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ApiOperation(value = "Return an user by username from gradle_db_users.Users table")
     @ApiResponses(
@@ -137,7 +139,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(resource);
     }
 
-    @GetMapping(value = "welcome", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "welcome", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Return the environment message")
     @ApiResponses(
             value = {
