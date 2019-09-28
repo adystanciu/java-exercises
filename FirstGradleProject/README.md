@@ -1,6 +1,6 @@
 # stady-exercises
 
-*FirstGradleProject*
+**FirstGradleProject**
 
 > This project it is a demo for practice some java features and frameworks.
 
@@ -14,8 +14,7 @@ This project is a _SpringBoot_ application and it use the following frameworks a
 - Spring Profiles
 - Hateoas: ###### This concept help to expose other resources which are related to a specific resource.
 
-###### In this example when it is called the resources for retrieve an user by username maybe it is useful to send the the specific user but also
-###### a link with another resource which can be used in this case to retrieve all the users.
+###### In this example when it is called the resources for retrieve an user by username maybe it is useful to send the the specific user but also a link with another resource which can be used in this case to retrieve all the users.
 
 > This project has a resource called /hello_world for showing an example of internationalization feature with SpringBoot
 
