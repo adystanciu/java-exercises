@@ -1,14 +1,11 @@
 package com.stady.FirstGradleProject.config;
 
-import org.apache.tomcat.util.descriptor.LocalResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.*;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
