@@ -41,6 +41,11 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 
+	// Spring Actuator for monitoring
+	implementation('org.springframework.boot:spring-boot-starter-actuator')
+	// Hal Browser makes it easy to consume the half services which are exposed by starter actuator
+	implementation('org.springframework.data:spring-data-rest-hal-browser')
+
 	//Hateoas
 	implementation('org.springframework.boot:spring-boot-starter-hateoas')
 

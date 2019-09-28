@@ -10,3 +10,7 @@
 #git push -u origin master
 
 # for access swagger: localhost:<SERVER_PORT>/swagger-ui.html (tutorial: https://www.youtube.com/watch?v=HHyjWc0ASl8)
+
+# Half browser: http://localhost:8091/browser/index.html#/ or http://localhost:8091/
+
+# Spring actuator http://localhost:8091/actuator
