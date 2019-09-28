@@ -40,6 +40,9 @@ dependencies {
 	// Springboot framework
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-web')
+	//Hateoas
+	implementation('org.springframework.boot:spring-boot-starter-hateoas')
+
 
 	configurations {
 		developmentOnly

@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -114,7 +116,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "user/{username}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "users/{username}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "Return an user by username from gradle_db_users.Users table")
     @ApiResponses(
@@ -123,11 +125,16 @@ public class UserController {
                     @ApiResponse(code = 200, message = "Successful Delete Operation")
             }
     )
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) throws UserNotFoundException {
+    public ResponseEntity<Resource<User>> getUserByUsername(@PathVariable String username) throws UserNotFoundException {
         logger.debug("Get user from Controller by username : {}", username);
         User user = userService.getUserByUsername(username);
 
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+        // Hateoas part
+        Resource<User> resource = new Resource<User>(user);
+        ControllerLinkBuilder link = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).getUsers());
+        resource.add(link.withRel("all-users"));
+
+        return ResponseEntity.status(HttpStatus.OK).body(resource);
     }
 
     @GetMapping(value = "welcome", produces = "application/json;charset=UTF-8")
