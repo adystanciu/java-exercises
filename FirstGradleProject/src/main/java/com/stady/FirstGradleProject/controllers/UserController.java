@@ -1,6 +1,7 @@
 package com.stady.FirstGradleProject.controllers;
 
 import com.stady.FirstGradleProject.errors.UserNotFoundException;
+import com.stady.FirstGradleProject.model.Asset;
 import com.stady.FirstGradleProject.model.User;
 import com.stady.FirstGradleProject.services.UserService;
 import io.swagger.annotations.Api;
@@ -9,7 +10,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -50,7 +50,6 @@ public class UserController {
         return (ArrayList<User>) userService.getUsers();
     }
 
-
     @GetMapping(value = "user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Return an user")
@@ -60,13 +59,40 @@ public class UserController {
                     @ApiResponse(code = 200, message = "Successful Operation")
             }
     )
-    public User getUserById(@RequestParam Long id) {
-        logger.debug("User Id : {}", id);
-        return userService.getUsersById(id);
+    public ResponseEntity<Resource<User>> getUserById(@RequestParam Long id) {
+        User user = userService.getUsersById(id);
+
+        //         Hateoas part
+        Resource<User> resource = new Resource<User>(user);
+        ControllerLinkBuilder link = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).getUsers());
+        resource.add(link.withRel("all-users"));
+
+        return ResponseEntity.status(HttpStatus.OK).body(resource);
+    }
+
+    @RequestMapping(value = "users/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    @ApiOperation(value = "Return an user by username from gradle_db_users.Users table")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 404, message = "The username does not exist on DB"),
+                    @ApiResponse(code = 200, message = "Successful Delete Operation")
+            }
+    )
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) throws UserNotFoundException {
+        logger.debug("Get user from Controller by username : {}", username);
+        User user = userService.getUserByUsername(username);
+
+//         Hateoas part
+//        Resource<User> resource = new Resource<User>(user);
+//        ControllerLinkBuilder link = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).getUsers());
+//        resource.add(link.withRel("all-users"));
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @PostMapping(value = "users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "Return a HttpStatus message")
+    @ApiOperation(value = "Adding a user on DB")
     @ApiResponses(
             value = {
                     @ApiResponse(code = 501, message = "The 501 message code indicates the fact that the user was not stored in DB."),
@@ -115,25 +141,31 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "users/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    @ApiOperation(value = "Return an user by username from gradle_db_users.Users table")
+
+    @GetMapping(value = "/users/{username}/assets", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Return all assets from gradle_db_users.assets table which are related to an user")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 404, message = "The username does not exist on DB"),
-                    @ApiResponse(code = 200, message = "Successful Delete Operation")
+                    @ApiResponse(code = 200, message = "Successful Read Operation"),
+                    @ApiResponse(code = 500, message = "Internal server error")
             }
     )
-    public ResponseEntity<Resource<User>> getUserByUsername(@PathVariable String username) throws UserNotFoundException {
-        logger.debug("Get user from Controller by username : {}", username);
-        User user = userService.getUserByUsername(username);
+    @ResponseStatus(HttpStatus.OK)
+    public List<Asset> getAssetsByUser(@PathVariable String username) {
+        return userService.getAssetsByUser(username);
+    }
 
-        // Hateoas part
-        Resource<User> resource = new Resource<User>(user);
-        ControllerLinkBuilder link = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).getUsers());
-        resource.add(link.withRel("all-users"));
-
-        return ResponseEntity.status(HttpStatus.OK).body(resource);
+    @PostMapping(value = "/users/{username}/assets", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Add a asset by an user on DB.")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 500, message = "Internal server error"),
+                    @ApiResponse(code = 201, message = "Successful Create Operation")
+            }
+    )
+    @ResponseStatus(HttpStatus.OK)
+    public Asset addAssetByUser(@PathVariable String username, @Valid @RequestBody Asset asset) {
+        return userService.addAssetByUser(username, asset);
     }
 
 }

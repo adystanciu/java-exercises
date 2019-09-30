@@ -1,6 +1,7 @@
 package com.stady.FirstGradleProject.services;
 
 import com.stady.FirstGradleProject.errors.UserNotFoundException;
+import com.stady.FirstGradleProject.model.Asset;
 import com.stady.FirstGradleProject.model.User;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface UserService {
 
     public User getUserByUsername(String username) throws UserNotFoundException;
 
+    public List<Asset> getAssetsByUser(String username);
+
+    public Asset addAssetByUser(String username, Asset asset);
 }

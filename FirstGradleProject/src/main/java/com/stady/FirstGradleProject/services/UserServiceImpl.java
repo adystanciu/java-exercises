@@ -1,7 +1,9 @@
 package com.stady.FirstGradleProject.services;
 
 import com.stady.FirstGradleProject.errors.UserNotFoundException;
+import com.stady.FirstGradleProject.model.Asset;
 import com.stady.FirstGradleProject.model.User;
+import com.stady.FirstGradleProject.repository.AssetRepository;
 import com.stady.FirstGradleProject.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private AssetRepository assetRepository;
+
+    @Autowired
     private Logger logger;
 
     private static final Logger errorLogger = LoggerFactory.getLogger("custom-errors-logger");
@@ -30,14 +35,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    @Override
-    public User getUsersById(Long id) {
-        logger.debug("The getUserById method from UserServiceImpl was called.");
-        final Optional<User> user = userRepository.findById(id);
-        if(!user.isPresent()) throw new UserNotFoundException("User with id: "+ id + " does not Exist!");
 
-        return user.get();
-    }
 
     @Override
     public User addUser(User user) throws Exception {
@@ -89,6 +87,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUsersById(Long id) {
+        logger.debug("The getUserById method from UserServiceImpl was called.");
+        final Optional<User> user = userRepository.findById(id);
+        if(!user.isPresent()) throw new UserNotFoundException("User with id: "+ id + " does not Exist!");
+
+        return user.get();
+    }
+
+    @Override
     public User getUserByUsername(String username) throws UserNotFoundException {
         logger.debug("The getUserByUsername method from UserServiceImpl was called. ");
 
@@ -102,4 +109,35 @@ public class UserServiceImpl implements UserService {
         throw e;
     }
 
+    @Override
+    public List<Asset> getAssetsByUser(String username) {
+        logger.debug("The getAssetsByUser method from UserServiceImpl was called.");
+        Optional<User> result = userRepository.findByUsername(username);
+
+        if (!result.isPresent()){
+            UserNotFoundException e = new UserNotFoundException("The user: "+ username + "does not exist!");
+            errorLogger.error("The user was not found because the username is not existing on DB.", username);
+            throw e;
+        }
+        User user = result.get();
+        return user.getAssets();
+    }
+
+    @Override
+    public Asset addAssetByUser(String username, Asset asset) {
+        logger.debug("The addAssetByUser method from UserServiceImpl was called.");
+        Optional<User> result = userRepository.findByUsername(username);
+
+        if (!result.isPresent()){
+            UserNotFoundException e = new UserNotFoundException("The user: "+ username + "does not exist!");
+            errorLogger.error("The user was not found because the username is not existing on DB.", username);
+            throw e;
+        }
+        User user = result.get();
+        asset.setOwner(user);
+        assetRepository.save(asset);
+        user.getAssets().add(asset);
+
+        return asset;
+    }
 }
