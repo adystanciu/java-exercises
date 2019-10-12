@@ -1,0 +1,33 @@
+DESIGN PATTERNS: Design patterns reprezinta "best practices" folosite de programatori software cu experienta in POO.
+Design patterns  sunt solutii la o problema generala pe care programtori o intalnesc in timpul dezvoltarii.
+
+CREATIONAL PATTERNS: Se ocupa de crearea obiectelor fara new si ascunderea detalilor de implementare/crearea
+
+- SINGLETON x -> creaza o singura instanta per classloader
+- FACTORY x -> creaza o fabrica de obiecte si ascunde logica de implementare.. ceri obiectul pe care il doresti si factory ti-l da
+- BUILDER x -> creaza instanta de obiect initializat campurile secvential
+- PROTOTYPE  -> creaza o noua instanta mereu
+
+STRUCTURAL PATTERNS: Au rolul de a compune noi clase prin mostenire si compozitie pentru a putea oferii noi beneficii si utilizari.
+
+- FACADE x -> ascunde logica grea a sistemului de client si ofera o interfata prin care sa interactionezi cu el.
+- PROXY -> creaza o noua clasa ce contine implementarile clasei cerute.
+Spring-ul foloseste la greu.. ceri clasa X primesti clasa Y care il contine pe X dar poate face si altceva
+
+- ADAPTER -> functioneaza ca un pod intre 2 interfete incompatibile. Ca un card reader intre laptop si card.
+Se creaza o noua clasa ce extinde una din interfete si foloseste cealalta prin compozitie
+
+BEHAVIORAL PATTERNS: Rolul lor este pentru a gasi soluti cand mai bune pentru cominicarea obiectelor.
+
+- TEMPLATE x -> Are rolul de a oferi un template pentru invocarea obiectelor.
+Se realizeaza printr-o clasa abstracat ce ofera diferite metode, subclasele le implementeaza dar metoda de invocare este data de template-ul oferit de abstract.
+
+- STRATEGY x -> Ofera diferite strategi prin care comportamentul difera la runtime in functie de context... OpNum este strategia.. + - * / contextele
+
+- OBSERVER -> este folosit cand este o legatura intre obiecte deobicei one-to-many.
+Se foloseste cu scopul a notifica dependetele unui obiect atunci cand el se modifica. Subiect si Observator.
+
+- ITERATOR -> Are rolul de a oferi un mod standard de traversare/ iterare printr-un colectie de obiecte fara a expune logica de traversare.
+Ofera metode de iterarere in functie de criterii specificate de dev
+
+- VISITATOR ->  Are rolul de a schimba executia unui algoritm al unui clase printr-un visitator. Prin aceasta metoda executia alg variaza in functie de cum variaza visitatorul.
