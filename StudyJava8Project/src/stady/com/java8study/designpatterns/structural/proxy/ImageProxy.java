@@ -11,7 +11,7 @@ public class ImageProxy implements Image{
     @Override
     public void display() {
         if (realImage == null) realImage = new RealImage(name);
-
+        System.out.println("Here is a proxy!");
         realImage.display();
     }
 }

@@ -5,13 +5,13 @@ CREATIONAL PATTERNS: Se ocupa de crearea obiectelor fara new si ascunderea detal
 
 - SINGLETON x -> creaza o singura instanta per classloader
 - FACTORY x -> creaza o fabrica de obiecte si ascunde logica de implementare.. ceri obiectul pe care il doresti si factory ti-l da
-- BUILDER x -> creaza instanta de obiect initializat campurile secvential
+- BUILDER x -> creaza instanta de obiect initializand campurile secvential
 - PROTOTYPE  -> creaza o noua instanta mereu
 
 STRUCTURAL PATTERNS: Au rolul de a compune noi clase prin mostenire si compozitie pentru a putea oferii noi beneficii si utilizari.
 
 - FACADE x -> ascunde logica grea a sistemului de client si ofera o interfata prin care sa interactionezi cu el.
-- PROXY -> creaza o noua clasa ce contine implementarile clasei cerute.
+- PROXY -> creaza o noua clasa ce contine implementarile clasei cerute putand avea si alte functionalitati in plus.
 Spring-ul foloseste la greu.. ceri clasa X primesti clasa Y care il contine pe X dar poate face si altceva
 
 - ADAPTER -> functioneaza ca un pod intre 2 interfete incompatibile. Ca un card reader intre laptop si card.

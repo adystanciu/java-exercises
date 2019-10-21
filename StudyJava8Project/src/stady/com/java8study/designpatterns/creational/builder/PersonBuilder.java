@@ -29,10 +29,6 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build(){
-       return new Person(this);
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -48,4 +44,9 @@ public class PersonBuilder {
     public Date getBirthDate() {
         return birthDate;
     }
+
+    public Person build(){
+        return new Person(this);
+    }
+
 }

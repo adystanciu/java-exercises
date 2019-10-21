@@ -6,7 +6,7 @@ public abstract class Game {
     public abstract void gameStart();
     public abstract void gameEnd();
 
-    public void play(){
+    final public void play(){
         this.gameInitialization();
         this.gameStart();
         this.gameEnd();

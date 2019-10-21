@@ -12,9 +12,7 @@ public class ShapeFacadeMaker {
         this.square = new Square();
     }
 
-    public void drawCircle(){
-        circle.draw();
-    }
+    public void drawCircle(){ circle.draw(); }
 
     public void drawRectangle(){
         rectangle.draw();
