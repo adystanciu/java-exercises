@@ -2,6 +2,13 @@ package stady.com.java8study.lambda;
 
 import stady.com.java8study.lambda.patterns.behavior_parameterization.FillterApples;
 
+import java.sql.Date;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -9,7 +16,7 @@ import java.util.function.Predicate;
 
 public class AppleMain {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         List<Apple> inventory = Arrays.asList(new Apple("green", 20), new Apple("yellow", 150), new Apple("red", 200));
         FillterApples.filterGreenApples(inventory).forEach(System.out::println);
@@ -71,7 +78,27 @@ public class AppleMain {
 //
 //        Thread t1 = new Thread(() ->System.out.println("Hello world from Lambda!"));
 //        t1.start();
+
+        String startDate="2019-05-12";
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date d = sdf1.parse(startDate);
+        java.sql.Date sqlStartDate = new java.sql.Date(1573554506122L);
+//        System.out.println(d.getTime());
+        System.out.println("TS: " +sqlStartDate);
+
+//        Date date = new Date(1555027200000L);
+//        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+//        System.out.println(format.format(date));
+
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern ("uuuu-MM-dd HH:mm:ss.SSS");
+        String text = "2019-10-30 14:43:58.222";
+        LocalDateTime dateTime = LocalDateTime.parse(text, dtf);
+        System.out.println(dateTime);
+
     }
+
+
 }
 
 /*
