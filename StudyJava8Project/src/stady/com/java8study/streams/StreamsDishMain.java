@@ -19,7 +19,9 @@ public class StreamsDishMain {
                 new Dish("season fruit", true, 120, DishType.OTHER),
                 new Dish("pizza", true, 550, DishType.OTHER),
                 new Dish("prawns", false, 300, DishType.FISH),
-                new Dish("salmon", false, 450, DishType.FISH) );
+                new Dish("salmon", false, 450, DishType.FISH),
+                new Dish("spaghetti", false, 650, DishType.OTHER)
+                );
 
 
         Optional<Dish> mostCalorieDish = menu.stream().collect(Collectors.maxBy(Comparator.comparingInt(Dish::getCalories)));
